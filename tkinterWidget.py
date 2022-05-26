@@ -1,14 +1,13 @@
 # Import Modules
-import tkinter as tk
+
 import requests
 import time
 
-
+from tkinter import *
 from bs4 import BeautifulSoup
 from screeninfo import get_monitors
 
 Prayer_time_based_on_country_URL = 'https://www.islamicfinder.org/prayer-widget/248946/shafi/4/0/18.5/19.0'
-icon = "OrangePrayerMat.ico"
 
 def getPrayerTimes():
     html_request = requests.get(Prayer_time_based_on_country_URL)
@@ -57,6 +56,7 @@ def getInfo(prayer):
             if now < prayer[i] + 30:
                 pray = name[i]
                 mins = prayer[i] - now
+                break
     text = "{}:{}".format(pray,mins)
     return text
 
@@ -75,9 +75,9 @@ height = 20
 geo = "{}x{}+{}+{}".format(width,height,monitor[0].width-width - 40,0)
 
 # Create Object
-root = tk.Tk()
+root = Tk()
 root.title('Prayer Times') 
-root.iconbitmap(icon)
+root.iconbitmap("D:\Desktop\Libraries\GitHub\PrayerWidget\OrangePrayerMat.ico")
 root.overrideredirect(1)
 
 # Set Geometry and Attributes
@@ -87,10 +87,10 @@ root.attributes('-topmost',True)
 root.geometry(geo)
 
 # Text
-counter = tk.Label(root,bg ='#333333',fg = "orange", text = "", font=('Helvetica bold', 12))
+counter = Label(root,bg ='#333333',fg = "orange", text = "", font=('Helvetica bold', 12))
 counter.pack()
 
 root.after(1000, loop)
-tk.mainloop()
+mainloop()
 # Execute Tkinter
 root.mainloop()
